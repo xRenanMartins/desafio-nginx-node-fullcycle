@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  app:
+    build: ./app
+    volumes:
+      - ./app:/usr/src/app
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: people_db
+    ports:
+      - "3000:3000"
+    networks:
+      - fullcycle-net
+    depends_on:
+      - mysql
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - fullcycle-net
+    depends_on:
+      - app
+
+  mysql:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: people_db
+    tty: true
+    networks:
+      - fullcycle-net
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+networks:
+  fullcycle-net:
+
+volumes:
+  mysql-data:
