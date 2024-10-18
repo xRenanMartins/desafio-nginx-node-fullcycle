@@ -14,4 +14,4 @@ Este projeto consiste em uma aplicação Node.js integrada ao MySQL, onde o Ngin
    ```bash
    git clone <url-do-repositorio>
    cd desafio-nginx-node-fullcycle
-   docker-compose up -d
+   docker-compose up -d --build
