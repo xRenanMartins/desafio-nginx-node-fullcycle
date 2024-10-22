@@ -1,11 +1,12 @@
 FROM node:14
 
-COPY . .
+WORKDIR /app
+
+COPY package*.json /app
 
 RUN npm install
 
-
-WORKDIR /usr/src/app
+COPY . /app
 
 ENV DOCKERIZE_VERSION v0.8.0
 

@@ -20,6 +20,7 @@ connection.connect((err) => {
 });
 
 app.get('/', (req, res) => {
+    connection.query(`CREATE TABLE IF NOT EXISTS people (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255))`);
     const sql = `INSERT INTO people(name) VALUES ('Renan')`;
     connection.query(sql, (err) => {
       if (err) {
