@@ -4,7 +4,8 @@ services:
   app:
     build: ./app
     volumes:
-      - ./app:/usr/src/app
+      - ./app:/app
+      - /app/node_modules
     entrypoint: dockerize -wait tcp://mysql:3306 -timeout 20s node index.js
     environment:
       DB_HOST: mysql
